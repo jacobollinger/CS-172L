@@ -1,0 +1,109 @@
+Open this file in a text editor (e.g. Notepad++, Brackets) and edit it by adding your answers. Do not use a word processor software like Microsoft Word.
+Email the modified file test3.txt by 11:30am.
+
+You have 3 hours to complete it. It is actually not that lengthy and it is meant to be completed in 1 hour. However I am giving you more time in case someone experiences technical or connection problems.
+
+During the test, you can use the material available on the course website, and you can use your Java programming environment. However you are strictly forbidden to communicate with another person. You cannot exchange questions or answers with any person. The answers you submit must be your own work.
+-----------------------------------------------------------------------------------------
+1. (4 points)
+Let a be an array of strings, and let k be a string. The strings in a are sorted by length. For example a = {"me", "you", "them", "everybody", ...}.
+Write a function that returns true if k is in a, and false otherwise. The function must be computationally efficient, and must perform a minimal number of steps to find the answer.
+
+static boolean search1(String[] a, String k)
+{
+    for(int i = 0; i < a.length && k.length() >= a[i].length(); i++){
+        if(k == a[i]){
+            return true;
+        }
+    }
+    return false;
+}
+-----------------------------------------------------------------------------------------
+2. (4 points)
+Let a be an array of strings, and let k be a string. The strings in a are sorted alphabetically. For example a = {"everybody", "me", "them", "you", ...}.
+Write a function that returns true if k is in a, and false otherwise. The function must be computationally efficient, and must perform a minimal number of steps to find the answer.
+
+static boolean search2(String[] a, String k)
+{
+    for(int i = 0; i < a.length && k.charAt(0) >= a[i].charAt(0); i++){
+        if(k == a[i]){
+            return true;
+        }
+    }
+    return false;
+}
+-----------------------------------------------------------------------------------------
+3. (8 points)
+We are given the following class Point.
+class Point
+{
+    public final double x;
+    public final double y;
+
+    public Point(double x, double y)
+    {
+        this.x = x;
+        this.y = y;
+    }
+
+    public double distance(Point p)
+    {
+        double diffX = (this.x - p.x) * (this.x - p.x);
+        double diffY = (this.y - p.y) * (this.y - p.y);
+        return Math.sqrt(diffX + diffY);
+    }
+}
+
+Write a function (outside of the class Point) that takes an array of point objects pointArr, and returns a new array containing the closest two points in pointArr.
+For example, see the image points.png. The input array pointArray contains a, b, c, d, and e. The output array contains a and b, since they are the closest pair of points.
+
+static Point[] closest(Point[] pointArr)
+{
+    Point[] closestArr = {pointArr[0], pointArr[0]};
+        for(int i = 0; i < pointArr.length; i++){
+            for(int j = i + 1; j < pointArr.length; j++){
+                if(pointArr[i].distance(pointArr[j]) > closestArr[0].distance(closestArr[1])){
+                    closestArr[0] = pointArr[i];
+                    closestArr[1] = pointArr[j];
+                }
+            }
+        }
+        return closestArr;
+}
+-----------------------------------------------------------------------------------------
+4. (8 points)
+Suppose we rewrite the class Rectangle from Lab 9 by changing its instance variables and constructor as follows.
+
+class Rectangle
+{
+    private Point bottomLeft;
+    private double width;
+    private double height;
+
+    public Rectangle(Point bottomLeft, double width, double height)
+    {
+        this.bottomLeft = bottomLeft;
+        this.width = width;
+        this.height = height;
+    }
+
+    // Returns true if a point p is strictly inside this rectangle.
+    // Returns false otherwise.
+    public boolean contains(Point p)
+    {
+        if(bottomLeft.x < p.x && p.x < bottomLeft.x + width && bottomLeft.y < p.y && p.y < bottomLeft.y + height){
+            return true;
+        }
+        return false;
+    }
+
+    // Returns true if a rectangle r is strictly inside this rectangle.
+    // Returns false otherwise.
+    public boolean contains(Rectangle r)
+    {
+        return this.contains(r.bottomLeft) && this.bottomLeft.x + this.width > r.bottomLeft.x + r.width && this.bottomLeft.y + this.height > r.bottomLeft.y + r.height;
+    }
+}
+
+Rewrite the functions contains from question 2 and 3 in Lab 9.
+-----------------------------------------------------------------------------------------

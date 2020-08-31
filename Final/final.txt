@@ -1,0 +1,68 @@
+Q1.)
+    public static int[] repeatIntegers(int n, int k){
+        int[] r = new int[n];
+        int j = 1;
+        for(int i = 1; i < r.length + 1; i++){
+            if(j > k){
+                j = 1;
+            }
+            r[i - 1] = j;
+            j++;
+        }
+        return r;
+    }
+
+Q2.)
+    public static int indexOfLongest(int[][] m){
+        int ndx = 0;
+        for(int i = 0; i < m.length; i++){
+            if(m[i].length > m[ndx].length){
+                ndx = i;
+            }
+        }
+        return ndx;
+    }
+
+Q3.)
+    a.)
+        public Employee(String name, int yob, String phone){
+            this.name = name;
+            this.yob = yob;
+            this.phone = phone;
+        }
+
+    b.)
+        public int compareTo(Employee e){
+            return e.yob - this.yob;
+        }
+    
+    c.)
+        public String areaCode(){
+            String ac = "";
+            for(int i = 1; i < 4; i++){
+                ac += this.phone.charAt(i);
+            }
+
+            return ac;
+        }
+
+    d.)
+        public boolean area901(Employee[] arr){
+            for(int i = 0; i < arr.length - 1; i++){
+                if(!arr[i].areaCode().equals("901")){
+                    return false;
+                }
+            }
+            return true;
+        }
+
+    e.)
+        public Employee youngestEmployee(Employee[] arr){
+            int ndx = 0;
+            for(int i = 1; i < arr.length; i++){
+                if(arr[i].compareTo(arr[ndx]) < 0){
+                    ndx = i;
+                }
+            }
+            return arr[ndx];
+        }
